@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/basictemplate.xhtml">
+
+	<ui:define name="content">
+		<style type="text/css">
+body {
+	background: url(images/fondo.jpg) no-repeat center;
+}
+</style>
+		<h:form
+			style=" background: rgba(19, 35, 47, 0.9);
+  				padding: 40px;
+  				max-width: 800px;
+  				margin: 40px auto;
+ 	 			border-radius: 4px;
+  				box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);"
+			id="form">
+			<center>
+				<p:panel id="panel" header="Buscar"
+					style="margin-bottom:10px;">
+					<h:panelGrid columns="3" cellpadding="5">
+						<p:outputLabel value="Buscar por nombre: " />
+						<p:inputText id="nombreJ" value="#{itemsBean.nombreJugador}"/>
+						<p:commandButton value="Buscar por nombre" action="#{itemsBean.buscarPorNombre()}" update="form"/>
+					</h:panelGrid>
+					<h:panelGrid columns="4" cellpadding="5">
+						<p:outputLabel value="Buscar por: " />
+						<p:selectOneMenu id="atributo" value="#{itemsBean.atributo}" style="width:125px">
+            				<f:selectItem itemLabel="goles" itemValue="goles" />
+            				<f:selectItem itemLabel="asistencias" itemValue="asistencias" />
+        				</p:selectOneMenu>
+        				<p:selectOneMenu id="condicion" value="#{itemsBean.condicion}" style="width:125px">
+        				     <f:selectItem itemLabel="más de" itemValue="mas de" />
+        				     <f:selectItem itemLabel="menos de" itemValue="menos de" />
+        				     <f:selectItem itemLabel="igual a" itemValue="igual a" /> 
+        				</p:selectOneMenu>
+        				<p:inputText value="#{itemsBean.valor}">
+        				</p:inputText>
+        				
+					</h:panelGrid>
+					<center>
+											<p:commandButton value="Buscar" action="#{itemsBean.buscarPorValor()}" update="form"/>
+					</center>
+				</p:panel>
+				<p:fieldset id="findResult" legend="Resultado busqueda">
+					<p:dataTable id="itemsResultado" var="item"
+						value="#{itemsBean.items}" scrollable="true" scrollHeight="150">
+						<p:column headerText="Nombre">
+							<h:outputText value="#{item.getNombre()}" />
+						</p:column>
+					</p:dataTable>
+				</p:fieldset>
+			</center>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+</html>

@@ -1,0 +1,12 @@
+col 0 = url jugador
+col 1 = nombre
+col 3 = partidos jugados
+col 4 = minutos jugados
+col 5 = goles
+col 6 = asistencias
+col 7 = paradas
+col 9 = tiros
+col 11 = precision tiros
+col 22 = tarjetas amarillas
+col 23 = tarjetas rojas
+col 27 = puntos Comunio

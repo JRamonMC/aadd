@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/basictemplate2.xhtml">
+	<ui:define name="content">
+		<style type="text/css">
+  			body {
+				background: url(images/fondo.jpg) no-repeat center ;
+			}
+		</style>
+		<h:form style=" background: rgba(19, 35, 47, 0.9);
+  				padding: 40px;
+  				max-width: 600px;
+  				margin: 40px auto;
+ 	 			border-radius: 4px;
+  				box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);" id="form">
+  			<center>
+			<p:panel id="panel" header="Bienvenido" style="margin-bottom:10px;">
+				<h:panelGrid columns="3" cellpadding="5">
+					<p:outputLabel for="usu" value="Usuario:" />
+					<p:inputText id="usu" value="#{inicioSesionBean.usuario}" required="true" label="Usuario" />
+					<p:message for="usu" />
+					<p:outputLabel for="pass" value="Contraseña:" />
+					<p:password id="pass" value="#{inicioSesionBean.clave}" required="true" label="Contraseña" />
+					<p:message for="pass" />
+				</h:panelGrid>
+					<br/>
+					<p:commandButton value="Iniciar sesión" action="#{inicioSesionBean.login}" />
+					<br/>
+					<br/>
+					<p:link outcome="faceletRegistro" value="Registrar" />
+			</p:panel>
+			</center>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

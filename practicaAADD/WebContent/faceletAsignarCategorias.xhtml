@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/basictemplate.xhtml">
+	<ui:define name="content">
+		<style type="text/css">
+body {
+	background: url(images/fondo.jpg) no-repeat center;
+}
+</style>
+
+		<script type="text/javascript">
+			function handleDrop(event, ui) {
+				var droppedCategoria = ui.draggable;
+				droppedCategoria.fadeOut('fast');
+			}
+		</script>
+
+		<h:form
+			style=" background: rgba(19, 35, 47, 0.9);
+  				padding: 40px;
+  				max-width: 600px;
+  				margin: 40px auto;
+ 	 			border-radius: 4px;
+  				box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);"
+			id="categoriaForm">
+			
+			<p:fieldset id="availableCatalogosField" legend="Catalogos disponibles">
+				<p:selectOneMenu id="availableCatalogos" value="#{categoriasBean.catalogoSelected}">
+					<f:selectItem itemLabel="Selecciona catalogo" itemValue="" />
+            		<f:selectItems value="#{categoriasBean.catalogos}" />		
+				</p:selectOneMenu>
+			</p:fieldset>
+			
+			<p:fieldset id="availableCategoriaField"
+				legend="Categorias disponibles">
+				<p:dataTable id="availableCategorias" var="categoria"
+					value="#{categoriasBean.categorias}">
+					<p:column style="width:20px">
+						<h:outputText id="dragIcon" styleClass="ui-icon ui-icon-arrow-4" />
+						<p:draggable for="dragIcon" revert="true" helper="clone" />
+					</p:column>
+					<p:column headerText="Codigo">
+						<h:outputText value="#{categoria.getCodigo()}" />
+					</p:column>
+					<p:column headerText="Nombre">
+						<h:outputText value="#{categoria.getNombre()}" />
+					</p:column>
+				</p:dataTable>
+			</p:fieldset>
+
+			<p:fieldset id="selectedCategorias" legend="Categorias seleccionadas"
+				style="margin-top:20px">
+				<p:outputPanel id="dropArea">
+					<h:outputText value="!!!Drop here!!!"
+						rendered="#{empty categoriasBean.droppedCategorias}"
+						style="font-size:24px;" />
+					<p:dataTable id="selectedCategoriasTable" var="categoria"
+						value="#{categoriasBean.droppedCategorias}"
+						rendered="#{not empty categoriasBean.droppedCategorias}">
+						<p:column headerText="Codigo">
+							<h:outputText value="#{categoria.getCodigo()}" />
+						</p:column>
+						<p:column headerText="Nombre">
+							<h:outputText value="#{categoria.getNombre()}" />
+						</p:column>
+					</p:dataTable>
+				</p:outputPanel>
+			</p:fieldset>
+
+			<p:droppable for="selectedCategorias" tolerance="touch"
+				activeStyleClass="ui-state-highlight"
+				datasource="availableCategorias" onDrop="handleDrop">
+				<p:ajax listener="#{categoriasBean.onCategoriaDrop}"
+					update="dropArea availableCategorias" />
+			</p:droppable>
+			<center>
+					<p:commandButton value="Asignar categorias" action="#{categoriasBean.asignarCategorias}" update="categoriaForm"/>
+			</center>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/basictemplate.xhtml">
+	<ui:define name="content">
+		<style type="text/css">
+body {
+	background: url(images/fondo.jpg) no-repeat center;
+}
+</style>
+
+		<script type="text/javascript">
+			function handleDrop(event, ui) {
+				var droppedItem = ui.draggable;
+				droppedItem.fadeOut('fast');
+			}
+		</script>
+		<h:form id="itemForm">
+			<p:fieldset id="availableCatalogosField" legend="Catalogos disponibles">
+				<p:selectOneMenu id="availableCatalogos" value="#{itemsBean.catalogoSelected}">
+					<f:selectItem itemLabel="Selecciona catalogo" itemValue="" />
+            		<f:selectItems value="#{itemsBean.catalogos}" />		
+				</p:selectOneMenu>
+				<center>
+					<p:commandButton value="Mostrar items" action="#{itemsBean.mostrarItems()}" update="itemForm"/>
+				</center>
+			</p:fieldset>
+		
+			<p:fieldset id="availableItemsField" legend="Items disponibles">
+				<p:dataTable id="availableItems" var="item"
+					value="#{itemsBean.items}" scrollable="true" scrollHeight="150">
+					<p:column style="width:20px">
+						<h:outputText id="dragIcon" styleClass="ui-icon ui-icon-arrow-4" />
+						<p:draggable for="dragIcon" revert="true" helper="clone" />
+					</p:column>
+					<p:column headerText="Nombre">
+						<h:outputText value="#{item.getNombre()}" />
+					</p:column>
+					<p:column style="width:32px">
+                    	<p:commandButton update=":itemForm:display" oncomplete="PF('itemDialog').show()" icon="ui-icon-search">
+                        	<f:setPropertyActionListener value="#{item}" target="#{itemsBean.itemSeleccionado}" update="form"/>
+                    	</p:commandButton>
+                	</p:column>
+				</p:dataTable>
+			</p:fieldset>
+
+			<p:fieldset id="selectedItems" legend="Items seleccionadas"
+				style="margin-top:20px">
+				<p:outputPanel id="dropArea">
+					<h:outputText value="!!!Drop here to delete!!!"
+						rendered="#{empty itemsBean.droppedItems}" style="font-size:24px;" />
+					<p:dataTable id="selectedItemsTable" var="item"
+						value="#{itemsBean.droppedItems}"
+						rendered="#{not empty itemsBean.droppedItems}">
+						<p:column headerText="Nombre">
+							<h:outputText value="#{item.getNombre()}" />
+						</p:column>
+					</p:dataTable>
+				</p:outputPanel>
+			</p:fieldset>
+
+			<p:droppable for="selectedItems" tolerance="touch"
+				activeStyleClass="ui-state-highlight" datasource="availableItems"
+				onDrop="handleDrop">
+				<p:ajax listener="#{itemsBean.onItemDrop}"
+					update="dropArea availableItems" />
+			</p:droppable>
+			<center>
+				<p:commandButton value="Eliminar seleccion"
+					action="#{itemsBean.eliminarItems}" />
+			</center>
+
+			<p:dialog header="Detalles Jugador" widgetVar="itemDialog" resizable="false"
+				draggable="false" showEffect="fade" hideEffect="fade" modal="true">
+
+				<p:outputPanel id="display">
+					<h:panelGrid columns="2" cellpadding="4"
+						rendered="#{not empty itemsBean.itemSeleccionado}">
+
+						<h:outputText value="Nombre:" />
+						<h:outputText value="#{itemsBean.itemSeleccionado.getNombre()}"
+							style="font-weight:bold" />
+
+						<h:outputText value="Partidos:" />
+						<h:outputText value="#{itemsBean.itemSeleccionado.getPartidosJugados()}"
+							style="font-weight:bold" />
+
+						<h:outputText value="Minutos:" />
+						<h:outputText value="#{itemsBean.itemSeleccionado.getMinutosJugados()}"
+							style="font-weight:bold" />
+
+						<h:outputText value="Goles:" />
+						<h:outputText value="#{itemsBean.itemSeleccionado.getGoles()}"
+							style="font-weight:bold" />
+							
+						<h:outputText value="Asistencias:" />
+						<h:outputText value="#{itemsBean.itemSeleccionado.getAsistencias()}"
+							style="font-weight:bold" />
+							
+						<h:outputText value="Paradas:" />
+						<h:outputText value="#{itemsBean.itemSeleccionado.getParadas()}"
+							style="font-weight:bold" />
+							
+						<h:outputText value="Paradas:" />
+						<h:outputText value="#{itemsBean.itemSeleccionado.getParadas()}"
+							style="font-weight:bold" />
+						<center>
+							<p:commandButton value="Eliminar" action="#{itemsBean.eliminarItemSeleccionado}" update="itemForm"/>
+						</center>
+					</h:panelGrid>
+				</p:outputPanel>
+			</p:dialog>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

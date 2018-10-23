@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<h:form>  
+    		<p:growl id="messages"/>
+ 		   	<p:menubar>
+        		<p:submenu label="Perfil">
+        			<p:menuitem value="Ver y modificar perfil" outcome="faceletModificar"/>
+        			<p:menuitem value="Cerrar sesión" action="#{inicioSesionBean.cerrarSesion}"/>
+        		</p:submenu>
+        		<p:submenu label="Catálogos">
+            		<p:menuitem value="Registrar catálogo" outcome="faceletRegistroCatalogo"/>
+            		<p:menuitem value="Añadir categorias a catalogo" outcome="faceletAsignarCategorias"/>
+            		<p:menuitem value="Crear categorias" outcome="faceletCrearCategoria"/>
+            		<p:menuitem value="Añadir items" outcome="faceletAddItems"/>
+            		<p:menuitem value="Buscar" outcome="faceletBuscar"/>
+            		<p:menuitem value="Ver items" outcome="faceletVerItems"/>
+        		</p:submenu>
+    		</p:menubar>
+		</h:form>
+</html>

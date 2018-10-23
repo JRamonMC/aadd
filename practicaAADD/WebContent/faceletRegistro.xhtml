@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/basictemplate2.xhtml">
+	<ui:define name="content">
+		<style type="text/css">
+  			body {
+				background: url(images/fondo.jpg) no-repeat center ;
+			}	
+		</style>
+    	<h:form style=" background: rgba(19, 35, 47, 0.9);
+  				padding: 40px;
+  				max-width: 600px;
+  				margin: 40px auto;
+ 	 			border-radius: 4px;
+  				box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);" id="form">
+  			<center>
+			<p:panel id="panel" header="Registro usuario" style="margin-bottom:10px;">
+        		<h:panelGrid columns="2" cellpadding="5">
+            		<p:outputLabel for="nombre" value="Nombre:" />
+        			<p:inputText id="nombre" value="#{registroUsuarioBean.nombre}"/>
+        				
+        			<p:outputLabel for="nif" value="NIF/NIE:" />
+        			<p:inputText id="nif" value="#{registroUsuarioBean.nif}"/>
+        				
+        			<p:outputLabel for="usuario1" value="Usuario:" />
+        			<p:inputText id="usuario1" value="#{registroUsuarioBean.usuario}"/>
+        				
+        			<p:outputLabel for="email" value="E-mail:" />
+        			<p:inputText id="email" value="#{registroUsuarioBean.email}"/>
+        				
+        			<p:outputLabel for="clave1" value="Contraseña:" />
+        			<p:password id="clave1" value="#{registroUsuarioBean.clave}"/>
+        				
+        			<p:outputLabel for="clave2" value="Repita la contraseña:" />
+        			<p:password id="clave2" value="#{registroUsuarioBean.clave2}"/>	
+        		</h:panelGrid>
+        		<br/>
+				<br/>
+ 				<p:commandButton value="Registrar" action="#{registroUsuarioBean.registrar}" />
+ 				</p:panel>
+			</center>
+            
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head> <link rel="stylesheet" type="text/css" href="css/aadd.css"> </head>
+<body>
+	<H11 align="center">  
+		<h1>Practica Final Aplicaciones Distribuidas 16/17</h1>
+		<h4><p>Bienvenido a la aplicacion web de la asignatura de Aplicaciones Distribuidas para el curso 2016/2017</p></h4>
+	</H11>
+	<button
+		onclick="document.getElementById('modal').style.display='block'"
+		style="width: 100px">Login</button>
+	<br>
+	<button
+		onclick="location.href='RegistroUsuario.jsp'"
+		style="width: 100px">Registro</button>
+	<br>
+	<button
+		onclick="location.href='ServletCerrar'"
+		style="width: 100px">Cerrar</button>
+
+	<div id="modal" class="modal">
+
+		<form class="modal-content animate" action="index.html" method="POST">
+			<div class="imgcontainer">
+				<span onclick="document.getElementById('modal').style.display='none'"
+					class="close" title="Close Modal">&times;</span> 
+					<img src="images/avatar.png" alt="Avatar" class="avatar">
+			</div>
+
+			<div class="container">
+					<input type="text"
+						placeholder="Introduzca usuario" name="usuario" required>
+					<input type="password" 
+						placeholder="Introduzca clave" name="clave" required>
+
+				<button type="submit">Login</button>
+			</div>
+
+			<div class="container" style="background-color: #f1f1f1">
+				<button type="button"
+					onclick="document.getElementById('modal').style.display='none'"
+					class="cancelbtn">Cancelar</button>
+			</div>
+		</form>
+	</div>
+
+	<script>
+		// Get the modal
+		var modal = document.getElementById('modal');
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
+	</script>
+
+</body>
+</html>

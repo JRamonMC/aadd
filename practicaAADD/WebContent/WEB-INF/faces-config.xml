@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+	version="2.2">
+
+	<application>
+		<locale-config>
+			<default-locale>es</default-locale>
+			<supported-locale>en</supported-locale>
+		</locale-config>
+
+		<message-bundle>resources.messages</message-bundle>
+		<resource-bundle>
+			<base-name>resources.messages</base-name>
+			<var>msg</var>
+		</resource-bundle>
+	</application>
+
+	<managed-bean>
+		<managed-bean-name>inicioSesionBean</managed-bean-name>
+		<managed-bean-class>beans.InicioSesionBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>registroUsuarioBean</managed-bean-name>
+		<managed-bean-class>beans.RegistroUsuarioBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>inicioSesionBean</property-name>
+			<value>#{inicioSesionBean}</value>
+		</managed-property>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>modificarUsuarioBean</managed-bean-name>
+		<managed-bean-class>beans.ModificarUsuarioBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>inicioSesionBean</property-name>
+			<value>#{inicioSesionBean}</value>
+		</managed-property>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>registroCatalogoBean</managed-bean-name>
+		<managed-bean-class>beans.RegistroCatalogoBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>inicioSesionBean</property-name>
+			<value>#{inicioSesionBean}</value>
+		</managed-property>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>catalogosBean</managed-bean-name>
+		<managed-bean-class>beans.CatalogosBean</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>categoriasBean</managed-bean-name>
+		<managed-bean-class>beans.CategoriasBean</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+		<managed-property>
+			<property-name>inicioSesionBean</property-name>
+			<value>#{inicioSesionBean}</value>
+		</managed-property>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>itemsBean</managed-bean-name>
+		<managed-bean-class>beans.ItemsBean</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+		<managed-property>
+			<property-name>inicioSesionBean</property-name>
+			<value>#{inicioSesionBean}</value>
+		</managed-property>
+	</managed-bean>
+</faces-config>

@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/basictemplate.xhtml">
+	<ui:define name="content">
+		<style type="text/css">
+body {
+	background: url(images/fondo.jpg) no-repeat center;
+}
+</style>
+
+		<h:form
+			style=" background: rgba(19, 35, 47, 0.9);
+      	padding: 40px;
+      	max-width: 600px;
+      	margin: 40px auto;
+      	border-radius: 4px;
+      	box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);"
+			id="form">
+			<p:growl id="growl" showDetail="true" sticky="true" />
+			<center>
+				<p:panel id="panel" header="Modificar datos Usuario"
+					style="margin-bottom:10px;">
+					<h:panelGrid columns="2" cellpadding="5">
+						<p:outputLabel value="Usuario:" />
+						<h:outputText value="#{inicioSesionBean.usuario}"></h:outputText>
+						<p:outputLabel value="NIF/NIE:" />
+						<h:outputText value="#{modificarUsuarioBean.getNombreNif()}"></h:outputText>
+					</h:panelGrid>
+					<h:panelGrid columns="2" cellpadding="5">
+						<p:outputLabel value="Nombre:" />
+						<h:outputText value="#{modificarUsuarioBean.getNombreUsuario()}"></h:outputText>
+						<p:outputLabel for="nombre" value="Nuevo nombre:" />
+						<p:inputText id="nombre" value="#{modificarUsuarioBean.nombre}" />
+					</h:panelGrid>
+					<p:commandButton value="Modificar nombre"
+						action="#{modificarUsuarioBean.actualizarNombre()}" update="growl"/>
+
+					<h:panelGrid columns="2" cellpadding="5">
+						<p:outputLabel value="E-mail:" />
+						<h:outputText value="#{modificarUsuarioBean.getNombreEmail()}"></h:outputText>
+						<p:outputLabel for="email" value="Nuevo email" />
+						<p:inputText id="email" value="#{modificarUsuarioBean.email}" />
+					</h:panelGrid>
+
+					<p:commandButton value="Modificar E-mail"
+						action="#{modificarUsuarioBean.actualizarEmail()}" update="growl"/>
+
+					<h:panelGrid columns="2" cellpadding="5">
+
+						<p:outputLabel value="Contraseña:" />
+						<h:outputText value="#{modificarUsuarioBean.getNombrePasswd()}"></h:outputText>
+						<p:outputLabel for="clave" value="Nueva contraseña:" />
+						<p:password id="clave" value="#{modificarUsuarioBean.clave}" />
+						<p:outputLabel for="clave2" value="Repita contraseña:" />
+						<p:password id="clave2" value="#{modificarUsuarioBean.clave2}" />
+					</h:panelGrid>
+					<p:commandButton value="Modificar Contraseña"
+						action="#{modificarUsuarioBean.actualizarPasswd}" update="growl"/>
+					<br />
+					<br />
+				</p:panel>
+			</center>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
